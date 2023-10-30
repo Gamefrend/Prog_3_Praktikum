@@ -1,4 +1,9 @@
+#include <stdio.h>
 int main(void){
-    print("MOOOOOOOOOOOOOOOOIN!");
-    print("Servus!");
+    int a;
+    int b;
+    scanf("%d",&a);
+    scanf("%d",&b);
+    print(a);
+    print(b);
 }
