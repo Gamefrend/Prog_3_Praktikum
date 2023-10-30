@@ -6,5 +6,4 @@ int main(void){
     scanf("%d",&b);
     print(a);
     print(b);
-    
 }
