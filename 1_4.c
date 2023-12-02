@@ -1,20 +1,17 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 int main(void){
-    int input = 129;
-    int rest = input;
-    for(;rest/100>0;rest = rest-100){
+    int i = 0;
+    int input = 0;
+    char* output = "Zahl: ";
+    scanf("%d",&input);
+    i = input;
+    for (;i/100>0;){
+        output = realloc(output,sizeof (char )*(2+ strlen(output)+1));
+        output [strlen(output)-2] = 'C';
+        i = i - 100;
     }
-    for(;rest/50>0;rest = rest-50){
-        printf("%c",'L');
-    }
-    for(;rest/10>0;rest = rest-10){
-        printf("%c",'X');
-    }
-    for(;rest/5>0;rest = rest-5){
-        printf("%c",'V');
-    }
-    for(;rest/1>0;rest = rest-1){
-        printf("%c",'I');
-    }
-    printf("\n");
+    printf("%s",output);
 
 }

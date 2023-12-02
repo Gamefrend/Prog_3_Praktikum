@@ -4,6 +4,6 @@ int main(void){
     int b;
     scanf("%d",&a);
     scanf("%d",&b);
-    print(a);
-    print(b);
+    printf("%d",a);
+    printf("%d",b);
 }
