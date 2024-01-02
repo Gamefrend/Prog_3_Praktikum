@@ -20,5 +20,12 @@ def wordCounter(inputString):
             wordDictionary.update({word:wordDictionary.get(word)+1})
     return wordDictionary
 
-print(charCounter("abca"))
-print(wordCounter("Allar was das was das Allar Dicka dickA bam"))
+def mostCommon(dictonary, number):
+    return sorted(dictonary, key = dictonary.get, reverse=True)[:number]
+
+if len(sys.argv) > 1:
+    with open(sys.argv[1]) as inputFile:
+        inputString = inputFile.read()
+    print(mostCommon(charCounter(inputString),25))
+    print(mostCommon(wordCounter(inputString),25))
+
