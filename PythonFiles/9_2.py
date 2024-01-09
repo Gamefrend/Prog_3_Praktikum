@@ -26,7 +26,6 @@ if len(sys.argv) < 2:
 
 key = ["w", "g", "s", "n", "q", "c", "d", "v", "m", "e", "y", "l", "u", "z", "o", "a", "b", "h", "r", "j", "f", "k", "x", "i", "p", "t"]
 val = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-print(r'C:\Users\eniav\Desktop\Uni Aufgaben\Prog 3' +"\u005C" + sys.argv[1])
 with open(r'C:\Users\eniav\Desktop\Uni Aufgaben\Prog 3' +"\u005C" + sys.argv[1]) as file:
     inhalt = file.read()
 
