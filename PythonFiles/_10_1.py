@@ -25,13 +25,21 @@ class Messungen:
     def __str__(self):
         return f'Der Timstamp liegt bei {self.timeStamp} und die Temparatur bei {self.temperatura}'
 
-messungen1 = Messungen("2019-01-11 17:45:01.356640", 21.5)
-messungen2 = Messungen('"2019-01-11 17:45:01.356640",20.5')
-messungen3 = Messungen("2019-01-11 17:45:01.356640", -20)
-messungen4 = messungen3
-alleMessungen = [messungen1, messungen2, messungen3]
-print(messungen1)
-print(messungen1 == messungen2)
-print(sorted(alleMessungen))
-print(messungen1 is messungen2)
-print(messungen3 is messungen4)
+    def __hash__(self):
+        return hash((self.timeStamp, self.temperatura))
+
+
+def tests():
+    messungen1 = Messungen("2019-01-11 17:45:01.356640", 21.5)
+    messungen2 = Messungen('"2019-01-11 17:45:01.356640",20.5')
+    messungen3 = Messungen("2019-01-11 17:45:01.356640", -20)
+    messungen4 = messungen3
+    alleMessungen = [messungen1, messungen2, messungen3]
+    print(messungen1)
+    print(messungen1 == messungen2)
+    print(sorted(alleMessungen))
+    print(messungen1 is messungen2)
+    print(messungen3 is messungen4)
+
+if __name__ == "__main__":
+    tests()
