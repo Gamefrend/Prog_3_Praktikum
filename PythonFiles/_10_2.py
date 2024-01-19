@@ -1,4 +1,6 @@
 from _10_1 import Messungen
+from _10_4 import MessreiheEigenIter
+
 
 class Messreihe:
     def __init__(self, messungen):
@@ -39,7 +41,16 @@ class Messreihe:
         return self
 
     def __iter__(self):
-        return iter(self.alleMessungen)
+        #normaler iter as einer Liste generieren
+        #return iter(self.alleMessungen)
+
+        #custom Iter
+        #funktioniert ist aber sehr langsam
+        #return MessreiheEigenIter(self.alleMessungen)
+
+        #generator selbst schreiben
+        for e in self.alleMessungen:
+            yield e
 
     def __getitem__(self, index):
         if isinstance(index, (int, slice)):
@@ -53,6 +64,8 @@ class Messreihe:
 with open(r"C:\Users\eniav\Desktop\Uni Aufgaben\Prog 3\messwerte.csv") as file:
     data = file.readlines()
 
+def enum(messreihe):
+    return zip(list(range(len(messreihe))), messreihe)
 def testsFuer10_2():
     messreihe = Messreihe(data)
     print(len(messreihe))
@@ -80,6 +93,16 @@ def testsFuer10_3():
     print(sum([x.temperatura for x in messreihe["2017-10"]+messreihe["2017-11"]+messreihe["2017-12"]])
           / len(messreihe["2017-10"]+messreihe["2017-11"]+messreihe["2017-12"]))
 
-testsFuer10_3()
+def testsFuer10_4():
+    messreihe = Messreihe(data)
+    print(messreihe[5].timeStamp[0:9])
+    print([x for x in messreihe if x.timeStamp[0:10] == "2016-04-21" and 20 < x.temperatura < 20.2])
+    it1, it2 = iter(messreihe), iter(messreihe)
+    for i in range(10):
+        m1, m2 = next(it1), next(it2)
+    print(m1, m2, "Problem" if m1 != m2 else "OK")
+    for i, e in enum(messreihe[0:10]):
+        print(str(i)+"."+str(e))
 
+testsFuer10_4()
 
