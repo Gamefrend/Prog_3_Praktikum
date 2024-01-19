@@ -47,7 +47,6 @@ class Messreihe:
                 return list(self.alleMessungen)[index]
             return Messreihe(list(self.alleMessungen)[index])
         if isinstance(index, str):
-            print(list(self.alleMessungen)[10].timeStamp[:len(index)])
             return Messreihe(list(filter(lambda x: x.timeStamp[:len(index)] == index, [x for x in self.alleMessungen])))
 
 
@@ -72,10 +71,12 @@ def testsFuer10_3():
     print(len(messreihe))
     messreihe += Messungen('"a",10')
     messreihe += Messungen('"a",999999999999999')
-    test = messreihe["2017-10-01"]+messreihe["2017-10-02"]
     print(len(messreihe))
     print(min(messreihe, key=lambda x: x.temperatura))
     print(max(messreihe, key=lambda x: x.temperatura))
+    print([x.timeStamp for x in messreihe if x.temperatura > 33])
+    print(len([x for x in messreihe if x.timeStamp[0:4] == "2017" and x.temperatura > 26]))
+    print(max([x.timeStamp for x in messreihe if int(x.temperatura) == 17]))
     print(sum([x.temperatura for x in messreihe["2017-10"]+messreihe["2017-11"]+messreihe["2017-12"]])
           / len(messreihe["2017-10"]+messreihe["2017-11"]+messreihe["2017-12"]))
 
