@@ -1,6 +1,6 @@
 from _10_1 import Messungen
 from _10_4 import MessreiheEigenIter
-
+from _11_1 import PipipupuException
 
 class Messreihe:
     def __init__(self, messungen):
@@ -28,7 +28,7 @@ class Messreihe:
     def __len__(self):
         return len(self.alleMessungen)
 
-    def __add__(self, *other):
+    def __add__(self, *other: 'Messreihe'):
         if isinstance(other[0], tuple):
             if isinstance(other[0][0], Messungen):
                 for i in range(len(other[0])):
@@ -52,7 +52,9 @@ class Messreihe:
         for e in self.alleMessungen:
             yield e
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int|slice|str) -> Messungen:
+        if not isinstance(index, int|slice|str):
+            raise ValueError("Index must be an integer, slice, or str")
         if isinstance(index, (int, slice)):
             if isinstance(index, int):
                 return list(self.alleMessungen)[index]
@@ -60,11 +62,18 @@ class Messreihe:
         if isinstance(index, str):
             return Messreihe(list(filter(lambda x: x.timeStamp[:len(index)] == index, [x for x in self.alleMessungen])))
 
+    def addnew(self, other: 'Messungen'):
+        if max([x.timeStamp for x in self.alleMessungen]) < other.timeStamp:
+            self += other
+            return self
+        raise PipipupuException("Ohoh stinky!")
+
+
 
 with open(r"C:\Users\eniav\Desktop\Uni Aufgaben\Prog 3\messwerte.csv") as file:
     data = file.readlines()
 
-def enum(messreihe):
+def enum(messreihe: Messreihe):
     return zip(list(range(len(messreihe))), messreihe)
 def testsFuer10_2():
     messreihe = Messreihe(data)
@@ -104,5 +113,15 @@ def testsFuer10_4():
     for i, e in enum(messreihe[0:10]):
         print(str(i)+"."+str(e))
 
-testsFuer10_4()
+def testsFuer11_2():
+    messreihe = Messreihe(data)[1:10]
+    try:
+        messreihe.addnew(messreihe[0])
+    except PipipupuException as e:
+        print(e)
+    try:
+        messreihe.addnew(Messreihe(data)[10])
+    except PipipupuException as e:
+        print(e)
 
+testsFuer11_2()
