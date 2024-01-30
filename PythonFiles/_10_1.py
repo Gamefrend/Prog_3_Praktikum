@@ -1,12 +1,20 @@
+import re
+from colorama import Fore, Style
+
 class Messungen:
     timeStamp = ""
     temperatura = 0.0
 
     def __init__(self, *elements):
+        patternTimestamp = re.compile(r"\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}")
         if len(elements) > 1:
+            if patternTimestamp.match(elements[0]) is None:
+                raise ValueError("Der gegebene Timestamp: "+elements[0]+" entspricht nicht der Sintax die gegeben wurde")
             self.timeStamp = str(elements[0])
             self.temperatura = float(elements[1])
         else:
+            if patternTimestamp.match(elements[0].split(",")[0][1:-1]) is None:
+                raise ValueError("Der gegebene Timestamp: " + elements[0].split(",")[0][1:-1] + " entspricht nicht der Sintax die gegeben wurde")
             self.timeStamp = str(elements[0].split(",")[0][1:-1])
             self.temperatura = float(elements[0].split(",")[1])
 
@@ -40,6 +48,20 @@ def tests():
     print(sorted(alleMessungen))
     print(messungen1 is messungen2)
     print(messungen3 is messungen4)
+    print(Fore.RED)
+    try:
+        fehlerhafteSintax = Messungen("2019-01-11 17:45:01.35664", 21.5)
+    except ValueError as e:
+        print(str(e))
+    try:
+        fehlerhafteSintax = Messungen("201901-11 17:45:01.35664", 21.5)
+    except ValueError as e:
+        print(str(e))
+    try:
+        fehlerhafteSintax = Messungen("2019-01-1117:45:01.35664", 21.5)
+    except ValueError as e:
+        print(str(e))
+    print(Style.RESET_ALL)
 
 if __name__ == "__main__":
     tests()
