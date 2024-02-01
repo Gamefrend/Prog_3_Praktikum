@@ -1,3 +1,4 @@
+import re
 class Spendensammler:
     def __init__(self):
         self.betrag = 0
@@ -16,13 +17,8 @@ class Spendensammler:
 
     def namensfinder(self, s):
         output = []
-        for e in s.split(" "):
-            if e == "und":
-                pass
-            elif e[len(e)-1] == ",":
-                output.append(e[:-1])
-            else:
-                output.append(e)
+        for e in re.split("und|, ",s):
+            output.append(e)
         return output
 
     def topspender(self):

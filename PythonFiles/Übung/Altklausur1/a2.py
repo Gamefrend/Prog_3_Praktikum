@@ -13,8 +13,6 @@ def wordpos(it):
 
 def sieheoben(it):
     verweis = {}
-    nurBuchstaben = re.compile(r"[^a-zA-Z]+")
-
     for i in wordpos(it):
         if i[0].isalpha():
             if i[0] not in verweis:
