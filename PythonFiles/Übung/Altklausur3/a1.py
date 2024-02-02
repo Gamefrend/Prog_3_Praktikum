@@ -1,17 +1,29 @@
 import re
 class RoemerZahl:
     def __init__(self, input=""):
-        if re.compile("^([C]*[L]*[X]*[V]*[I]*)$|([1-9]+)").fullmatch(input) is None and not input == "":
+        if re.compile("^([C]*[L]*[X]*[V]*[I]*)$|^([0-9]+)$").fullmatch(input) is None and not input == "":
             raise ValueError("")
-        print(re.compile("^([C]*[L]*[X]*[V]*[I]*)*$|([1-9]+)").fullmatch(input))
-        self.roemisch = input
-        self.modern = self.umwandeln(input)
+        if re.compile("^([0-9]+)$").fullmatch(input) is not None:
+            self.modern = input
+            self.roemerZahl = self.umwandelnRoemisch(input)
+        else:
+            self.roemisch = input
+            self.modern = self.umwandeln(input)
 
     def umwandeln(self, input):
         output = 0
         lookup = {"I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100}
         for char in input:
             output += lookup[char]
+        return output
+
+    def umwandelnRoemisch(self, input):
+        lookup = {1: "I", 5: "V", 10: "X", 50: "L", 100: "C"}
+        output = ""
+        for e in [100, 50, 10, 5, 1]:
+            while int(input)//e > 0:
+                output += lookup[e]
+                input = str(int(input) - e)
         return output
     def __repr__(self):
         return "RoemerZahl('"+self.roemisch+"')"
@@ -22,8 +34,12 @@ class RoemerZahl:
 zahl1 = RoemerZahl("")
 zahl2 = RoemerZahl("XIII")
 zahl3 = RoemerZahl("C")
-zahl4 = RoemerZahl("IXIIV")
+try:
+    zahl4 = RoemerZahl("IXIIV")
+except ValueError as e:
+    print (e)
+zahl5 = RoemerZahl("101")
 print(zahl2.modern)
-print(zahl4.modern)
 print(str(eval(repr(zahl2))))
 print(str(zahl1) == "")
+print(zahl5.roemerZahl, zahl5.modern)
