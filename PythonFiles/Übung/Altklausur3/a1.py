@@ -25,6 +25,24 @@ class RoemerZahl:
                 output += lookup[e]
                 input = str(int(input) - e)
         return output
+
+    def __len__(self):
+        return len(self.modern)
+
+    def __add__(self, other):
+        output = ""
+        lookup = {"I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100}
+        for e in lookup:
+            if re.compile(re.escape(e)).findall(self.roemisch+other.roemisch) is not None:
+                for i in range(len(re.compile(re.escape(e)).findall(self.roemisch+other.roemisch))):
+                    output += e
+        return RoemerZahl(output[::-1])
+
+    def __gt__(self, other):
+        if self.modern == other.modern:
+            return self.roemisch > other.roemisch
+        return self.modern > other.modern
+
     def __repr__(self):
         return "RoemerZahl('"+self.roemisch+"')"
 
@@ -42,4 +60,7 @@ zahl5 = RoemerZahl("101")
 print(zahl2.modern)
 print(str(eval(repr(zahl2))))
 print(str(zahl1) == "")
+print(zahl2+zahl3)
 print(zahl5.roemerZahl, zahl5.modern)
+print(list(map(str, sorted([zahl1, zahl2, zahl3, RoemerZahl("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"), RoemerZahl("CLLV")]))))
+print(list(map(str, sorted([RoemerZahl("XVII"), RoemerZahl("VVVII")]))))
