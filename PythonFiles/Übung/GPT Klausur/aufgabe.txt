@@ -1,0 +1,160 @@
+Hier ist eine ähnliche Klausur für die Aufgabe 1:
+
+Aufgabe 1 (Python 3 – 10 Pkt)
+
+Klasse Obstsalat:
+
+Implementieren Sie die Klasse Obstsalat, die bei der Instanziierung optional den Namen und das ganzzahlige Gewicht eines Obstes akzeptiert. Die Namen der Obstsorten sollen stets kapitalisiert sein. Das Dictionary-wertige Attribut zutaten einer Obstsalat-Instanz enthält die Zutaten des Obstsalats, wobei Schlüssel die Namen und Werte das Gewicht der jeweiligen Zutat sind.
+
+python
+Copy code
+class Obstsalat:
+    def __init__(self, name="", gewicht=0):
+        # Implementierung hier
+
+    def __repr__(self):
+        # Implementierung hier
+
+    def __add__(self, other):
+        # Implementierung hier
+
+    @property
+    def gewicht(self):
+        # Implementierung hier
+
+# Beispieltests
+g = Obstsalat()
+print(repr(g), g.name == "", g.zutaten)
+
+f = Obstsalat("ApFeL", 5)
+print(repr(f), f.name, f.zutaten)
+
+c = Obstsalat("Banane", 3) + Obstsalat('ApFEL', 1)
+print((c.name, c.zutaten))
+
+b = Obstsalat("Kirsche", 5) + Obstsalat("BiRnE", 8) + Obstsalat('biRNe', 4)
+print((b.name, b.zutaten))
+
+b = Obstsalat("Papaya", 5) + Obstsalat("Kiwi", 8) + Obstsalat("TrAUbe", 4)
+print(b.gewicht)
+Klasse RoemZahl:
+
+Implementieren Sie die Klasse RoemZahl, die bei der Instanziierung optional eine neoromische Zahl als String akzeptiert. Bei fehlerhaften Parametern oder ungültiger neoromischer Zahl soll eine ValueError Exception geworfen werden.
+
+python
+Copy code
+class RoemZahl:
+    def __init__(self, zahl=""):
+        # Implementierung hier
+
+    def __repr__(self):
+        # Implementierung hier
+
+    def __str__(self):
+        # Implementierung hier
+
+    def __add__(self, other):
+        # Implementierung hier
+
+    def __len__(self):
+        # Implementierung hier
+
+    @classmethod
+    def from_decimal(cls, value):
+        # Implementierung hier
+
+# Beispieltests
+z1 = RoemZahl('VVVII')
+print(str(z1))
+print(repr(z1))
+print(str(eval(repr(z1))))
+
+z2 = RoemZahl()
+print(str(z2) == " ")
+print(repr(z2))
+
+z = RoemZahl('XVVI') + RoemZahl('XI') + RoemZahl('VI')
+print(str(z))
+print(repr(z))
+
+print(RoemZahl(17))
+print(str(RoemZahl(123)))
+print(len(RoemZahl('CXXIII')))
+print(len(RoemZahl('VVVII')))
+Sortierbare RoemZahl-Objekte:
+
+Ergänzen Sie die RoemZahl-Klasse, damit Folgen von RoemZahl-Objekten sortierbar sind.
+
+python
+Copy code
+slst = sorted([RoemZahl('V'), RoemZahl('VI'), RoemZahl('IIII')])
+print(list(map(str, slst)))
+
+slst = sorted([RoemZahl('XXVVVIIIIIII'), RoemZahl('XVII'), RoemZahl('VVVII'), RoemZahl('IIII')])
+print(list(map(repr, slst)))
+Ich hoffe, das hilft! Wenn Sie weitere Fragen haben oder weitere Hilfe benötigen, lassen Sie es mich bitte wissen.
+
+User
+Ich meine mit neuen aufgaben die ähnliche anforderungen haben und ohne lösung
+ChatGPT
+Entschuldigung für das Missverständnis. Hier sind weitere Aufgaben, die ähnliche Anforderungen haben:
+
+Aufgabe 2 (Python 3 – 10 Pkt)
+
+Klasse Student:
+
+Implementieren Sie eine Klasse Student, die folgende Anforderungen erfüllt:
+
+Der Konstruktor der Klasse soll Vorname, Nachname und Matrikelnummer des Studenten als Parameter akzeptieren.
+Implementieren Sie eine Methode get_full_name, die den vollständigen Namen des Studenten zurückgibt (Vorname und Nachname).
+Implementieren Sie eine Methode get_student_info, die eine Zeichenkette mit Informationen über den Studenten (Vorname, Nachname, Matrikelnummer) zurückgibt.
+Implementieren Sie eine Klassenvariable anzahl_studenten, die die Gesamtanzahl der erstellten Studentenobjekte zählt.
+python
+Copy code
+class Student:
+    # Implementierung hier
+
+# Beispieltests
+s1 = Student("Max", "Mustermann", "12345")
+s2 = Student("Anna", "Musterfrau", "67890")
+
+print(s1.get_full_name())  # Ausgabe: Max Mustermann
+print(s1.get_student_info())  # Ausgabe: Max Mustermann (Matrikelnummer: 12345)
+
+print(Student.anzahl_studenten)  # Ausgabe: 2
+Klasse Buch:
+
+Implementieren Sie eine Klasse Buch, die folgende Anforderungen erfüllt:
+
+Der Konstruktor der Klasse soll Titel, Autor und ISBN des Buchs als Parameter akzeptieren.
+Implementieren Sie eine Methode get_buch_info, die eine Zeichenkette mit Informationen über das Buch (Titel, Autor, ISBN) zurückgibt.
+Implementieren Sie eine Klassenmethode validate_isbn, die prüft, ob eine gegebene ISBN gültig ist (z.B., ob sie aus 13 Ziffern besteht).
+Implementieren Sie eine Klassenvariable anzahl_buecher, die die Gesamtanzahl der erstellten Buchobjekte zählt.
+python
+Copy code
+class Buch:
+    # Implementierung hier
+
+# Beispieltests
+b1 = Buch("Python Programming", "John Doe", "9780134444321")
+b2 = Buch("Data Science Essentials", "Jane Smith", "9780470888651")
+
+print(b1.get_buch_info())  # Ausgabe: Python Programming by John Doe (ISBN: 9780134444321)
+
+print(Buch.validate_isbn("9780470888651"))  # Ausgabe: True
+print(Buch.validate_isbn("12345"))  # Ausgabe: False
+
+print(Buch.anzahl_buecher)  # Ausgabe: 2
+Sortierbare Zahlen:
+
+Implementieren Sie eine Funktion sortiere_zahlen, die eine Liste von Zahlen sortiert. Die Sortierung soll aufsteigend erfolgen, und dabei sollen gerade Zahlen vor ungeraden Zahlen stehen.
+
+python
+Copy code
+def sortiere_zahlen(zahlen):
+    # Implementierung hier
+
+# Beispieltests
+zahlenliste = [3, 8, 1, 6, 5, 4, 7, 2]
+print(sortiere_zahlen(zahlenliste))  # Ausgabe: [2, 4, 6, 8, 1, 3, 5, 7]
+Ich hoffe, diese Aufgaben entsprechen Ihren Erwartungen. Wenn Sie weitere Anpassungen wünschen oder weitere Aufgaben benötigen, lassen Sie es mich einfach wissen!
