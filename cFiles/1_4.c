@@ -1,17 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-int main(void){
-    int i = 0;
-    int input = 0;
-    char* output = "Zahl: ";
-    scanf("%d",&input);
-    i = input;
-    for (;i/100>0;){
-        output = realloc(output,sizeof (char )*(2+ strlen(output)+1));
-        output [strlen(output)-2] = 'C';
-        i = i - 100;
-    }
-    printf("%s",output);
 
+int main(void) {
+    int input;
+    char* output = (char*) malloc(1);
+    char* lookup = "CLXVI";
+    int values [] = {100,50,10,5,1};
+    int i = 0;
+    *output = '\0';
+
+    scanf("%d", &input);
+    printf("%d\n", input);
+    for(;i< strlen(lookup);i++) {
+        for (; input >= values[i]; input -= values[i]) {
+            output = (char *) realloc(output, strlen(output) + 2);
+            strncat(output, &lookup[i],1);
+        }
+    }
+
+
+    printf("%s\n", output);
+    free(output);
+
+    return 0;
 }
